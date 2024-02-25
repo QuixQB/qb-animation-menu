@@ -1,0 +1,32 @@
+SQL Command to Create player_emotes Table:
+
+CREATE TABLE IF NOT EXISTS `player_emotes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_id` varchar(50) DEFAULT NULL,
+  `emote_category` varchar(255) NOT NULL,
+  `emote_index` int(11) NOT NULL,
+  `emote_type` varchar(255) NOT NULL,
+  `emote_value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+Integrating Emotes into Radial Menu:
+
+For integrating emotes into the radial menu, you can either directly call the function emotes:OpenMenu or incorporate it as part of a menu item as shown below:
+
+{
+  id = "emotes",
+  displayName = "Emotes",
+  icon = "#emotes",
+  enableMenu = function()
+    local Data = QBCore.Functions.GetPlayerData()
+    return not Data.metadata["isdead"] and not Data.metadata["inlaststand"]
+  end,
+  functionName = "emotes:OpenMenu"
+},
+
+
+Alternatively, use the direct function call:
+
+emotes:OpenMenu
